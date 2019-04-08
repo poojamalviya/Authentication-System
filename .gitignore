@@ -1,0 +1,9 @@
+libs
+*.txt
+*.pyc
+../default
+*.ipynb
+*.ipynb_checkpoints
+default.pyc
+/.idea
+.DS_Store

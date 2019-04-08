@@ -35,9 +35,9 @@ def login(request):
 
 def authenticate(request):
 
-    name = request.POST.get("name")
+    email = request.POST.get("email")
 
-    user_data= User.objects.get(name= name)
+    user_data= User.objects.get(email= email)
 
     if user_data is None:
 
@@ -49,9 +49,9 @@ def authenticate(request):
 
     else:
 
-        bearerToken = name + ':' +uuid.uuid1()
+        bearerToken = email + ':' +uuid.uuid1()
 
-        cache.set(name, bearerToken , timeout=30)
+        cache.set(email, bearerToken , timeout=30)
 
         return HttpResponse(json.dumps({"status": 200, "Token":bearerToken}), mimetype='application/json')
 
@@ -61,11 +61,11 @@ def authenticate(request):
 def validate(request):
 
     tokenString = request.GET.get("token")
-    getName = tokenString.split(':')
+    getEmail = tokenString.split(':')
 
-    name = getName[0]
+    email = getEmail[0]
 
-    checkInCache = cache.get(name)
+    checkInCache = cache.get(email)
 
     if checkInCache is not None:
         return HttpResponse(json.dumps({"status": 200, "message": True}),
