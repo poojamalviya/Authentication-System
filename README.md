@@ -1,4 +1,4 @@
-# StrideTask
+# Token based authentication
 ____
 
 Django framework used to create a authentication middleware.
